@@ -4,7 +4,7 @@ node_modules
 # Bỏ qua folder .docker vì folder này chỉ có service db và redis mới cần (ta đang build image cho service app)
 .docker
 
-# Bỏ qua ảnh mà chúng ta đã upload lên trong quá trình test
+# Bỏ qua ảnh mà c húng ta đã upload lên trong quá trình test
 public/images/*
 
 # Bỏ qua file .env, file này dùng cho docker-compose khi chạy nên không cần đưa vào image
