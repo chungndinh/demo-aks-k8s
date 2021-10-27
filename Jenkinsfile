@@ -32,6 +32,8 @@ pipeline {
 				withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
             			sh "docker login -u chungnd -p ${dockerhub}"
 				}
+                sh "cd app"
+                sh "ls"
 				sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
 				sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
 				script {
