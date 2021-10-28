@@ -22,7 +22,8 @@ pipeline {
 				sh "cd app"
                 sh "ls"
 				// sh "npm install"
-				sh "npm test"
+				// sh "npm test"
+				sh 'npm config ls'
 		    }
 	    }
 
