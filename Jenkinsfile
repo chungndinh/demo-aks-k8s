@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+  agent any
+  tools {nodejs "node"}
 	
 	environment {
 		DOCKER_IMAGE = 'chungnd/nodejs-mongodb'
