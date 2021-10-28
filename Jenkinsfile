@@ -24,6 +24,7 @@ pipeline {
 				// sh "npm install"
 				// sh "npm test"
 				sh 'npm config ls'
+				sh 'npm install'
 		    }
 	    }
 
