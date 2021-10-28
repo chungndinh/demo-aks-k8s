@@ -20,6 +20,7 @@ pipeline {
 				// sh '/usr/local/bin/phpunit/phpunit .'
 				sh "cd app"
                 sh "ls"
+				sh "npm install"
 				sh "npm test"
 		    }
 	    }
