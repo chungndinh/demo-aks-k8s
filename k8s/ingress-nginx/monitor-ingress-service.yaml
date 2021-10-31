@@ -11,7 +11,7 @@ metadata:
 spec:
   rules:
 
-  - host: monitor.motthang.ga
+  - host: monitor.choitet.ga
     http:
       paths:
       - backend:

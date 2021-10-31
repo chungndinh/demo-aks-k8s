@@ -1,13 +1,28 @@
+## Storage Class on Azure
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   labels:
+#     kubernetes.io/cluster-service: "true"
+#   name: elk-storageclass
+# parameters:
+#   cachingmode: ReadOnly
+#   kind: Managed
+#   storageaccounttype: Premium_LRS
+# provisioner: kubernetes.io/azure-disk
+# reclaimPolicy: Retain
+# volumeBindingMode: Immediate
+
+## Storage Class on GKE
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  labels:
-    kubernetes.io/cluster-service: "true"
   name: elk-storageclass
-parameters:
-  cachingmode: ReadOnly
-  kind: Managed
-  storageaccounttype: Premium_LRS
-provisioner: kubernetes.io/azure-disk
-reclaimPolicy: Retain
+provisioner: kubernetes.io/gce-pd
 volumeBindingMode: Immediate
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+parameters:
+  type: pd-ssd
+  fstype: ext4
+  replication-type: none

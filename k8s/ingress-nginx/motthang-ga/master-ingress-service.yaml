@@ -21,12 +21,12 @@ spec:
       paths:
       - backend:
           service:
-            name: django-cluster-ip-service
+            name: demo-nodejs-service
             port:
-              number: 8000
+              number: 3000
         path: /
         pathType: Prefix
-  - host: demo.motthang.ga
+  - host: motthang.ga
     http:
       paths:
       - backend:
@@ -36,60 +36,70 @@ spec:
               number: 3000
         path: /
         pathType: Prefix
-  - host: motthang.ga
-    http:
-      paths:
-      - path: /admin
-        backend:
-          service:
-            name: django-cluster-ip-service
-            port:
-              number: 8000
-        pathType: Prefix
+  # - host: demo.motthang.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: demo-nodejs-service
+  #           port:
+  #             number: 3000
+  #       path: /
+  #       pathType: Prefix
+  # - host: motthang.ga
+  #   http:
+  #     paths:
+  #     - path: /admin
+  #       backend:
+  #         service:
+  #           name: django-cluster-ip-service
+  #           port:
+  #             number: 8000
+  #       pathType: Prefix
 
-      - path: /api
-        backend:
-          service:
-            name: django-cluster-ip-service
-            port:
-              number: 8000
-        pathType: Prefix
-      - path: /static/admin/
-        backend:
-          service:
-            name: static-assets-cluster-ip-service
-            port:
-              number: 8000
-        pathType: Prefix
-      - path: /static/rest_framework/
-        backend:
-          service:
-            name: static-assets-cluster-ip-service
-            port:
-              number: 8000  
-        pathType: Prefix        
-      - path: /static/
-        backend:
-          service:
-            name: react-cluster-ip-service
-            port:
-              number: 3000
-        pathType: Prefix
+  #     - path: /api
+  #       backend:
+  #         service:
+  #           name: django-cluster-ip-service
+  #           port:
+  #             number: 8000
+  #       pathType: Prefix
+  #     - path: /static/admin/
+  #       backend:
+  #         service:
+  #           name: static-assets-cluster-ip-service
+  #           port:
+  #             number: 8000
+  #       pathType: Prefix
+  #     - path: /static/rest_framework/
+  #       backend:
+  #         service:
+  #           name: static-assets-cluster-ip-service
+  #           port:
+  #             number: 8000  
+  #       pathType: Prefix        
+  #     - path: /static/
+  #       backend:
+  #         service:
+  #           name: react-cluster-ip-service
+  #           port:
+  #             number: 3000
+  #       pathType: Prefix
 
-      - path: /
-        backend:
-          service:
-            name: demo-nodejs-service
-            port:
-              number: 3000
-        pathType: Prefix
-      - path: /static/
-        backend:
-          service:
-            name: django-cluster-ip-service
-            port:
-              number: 8000
-        pathType: Prefix        
+  #     - path: /
+  #       backend:
+  #         service:
+  #           name: demo-nodejs-service
+  #           port:
+  #             number: 3000
+  #       pathType: Prefix
+  #     - path: /static/
+  #       backend:
+  #         service:
+  #           name: django-cluster-ip-service
+  #           port:
+  #             number: 8000
+  #       pathType: Prefix        
   - host: monitor.motthang.ga
     http:
       paths:
@@ -100,56 +110,56 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-  - host: guestbook.motthang.ga
-    http:
-      paths:
-      - backend:
-          service:
-            name: frontend
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
-  - host: vote.motthang.ga
-    http:
-      paths:
-      - backend:
-          service:
-            name: vote
-            port:
-              number: 5000
-        path: /
-        pathType: Prefix
-  - host: result.motthang.ga
-    http:
-      paths:
-      - backend:
-          service:
-            name: result
-            port:
-              number: 5001
-        path: /
-        pathType: Prefix
-  - host: mongodb.motthang.ga
-    http:
-      paths:
-      - backend:
-          service:
-            name: prometheus-service-extenal 
-            port:
-              number: 9090
-        path: /
-        pathType: Prefix
+  # - host: guestbook.motthang.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: frontend
+  #           port:
+  #             number: 80
+  #       path: /
+  #       pathType: Prefix
+  # - host: vote.motthang.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: vote
+  #           port:
+  #             number: 5000
+  #       path: /
+  #       pathType: Prefix
+  # - host: result.motthang.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: result
+  #           port:
+  #             number: 5001
+  #       path: /
+  #       pathType: Prefix
+  # - host: mongodb.motthang.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: prometheus-service-extenal 
+  #           port:
+  #             number: 9090
+  #       path: /
+  #       pathType: Prefix
   tls:
   - hosts:
     - www.motthang.ga
     - motthang.ga
     - monitor.motthang.ga
-    - vpn.motthang.ga
-    - vote.motthang.ga
-    - result.motthang.ga
-    - guestbook.motthang.ga
-    - mongodb.motthang.ga
-    - demo.motthang.ga
+    # - vpn.motthang.ga
+    # - vote.motthang.ga
+    # - result.motthang.ga
+    # - guestbook.motthang.ga
+    # - mongodb.motthang.ga
+    # - demo.motthang.ga
     secretName: motthang.ga-certificate-secret
  

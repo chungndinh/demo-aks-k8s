@@ -23,8 +23,8 @@ pipeline {
                 sh "ls"
 				// sh "npm install"
 				// sh "npm test"
-				sh 'npm config ls'
-				sh 'npm install'
+				// sh 'npm config ls'
+				// sh 'npm install'
 		    }
 	    }
 
@@ -63,6 +63,7 @@ pipeline {
 						// echo "Start deployment of nodejs-deployment.yaml"
 						// step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'Deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
 						// echo "Deployment Finished ..."
+						
 					  }
 					else
 					{
