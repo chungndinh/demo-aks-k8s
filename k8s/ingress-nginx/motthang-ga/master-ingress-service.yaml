@@ -36,16 +36,16 @@ spec:
               number: 3000
         path: /
         pathType: Prefix
-  # - host: demo.motthang.ga
-  #   http:
-  #     paths:
-  #     - backend:
-  #         service:
-  #           name: demo-nodejs-service
-  #           port:
-  #             number: 3000
-  #       path: /
-  #       pathType: Prefix
+  - host: kibana.motthang.ga
+    http:
+      paths:
+      - backend:
+          service:
+            name: kibana-kibana
+            port:
+              number: 5601
+        path: /
+        pathType: Prefix
   # - host: motthang.ga
   #   http:
   #     paths:
@@ -160,6 +160,6 @@ spec:
     # - result.motthang.ga
     # - guestbook.motthang.ga
     # - mongodb.motthang.ga
-    # - demo.motthang.ga
+    - kibana.motthang.ga
     secretName: motthang.ga-certificate-secret
  

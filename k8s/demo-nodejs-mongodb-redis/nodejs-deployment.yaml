@@ -1,20 +1,9 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: demo-nodejs-pvc
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-nodejs-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: demo-nodejs-app

@@ -38,3 +38,6 @@ apk update
 apk add mongodb yaml-cpp=0.6.2-r2
 mongo -version
 mongo "mongodb://myuser:myuserpass@mongodb-helm-headless:27017/test_db?replicaSet=rs0"
+## Install redis on alpine
+apk --update add redis 
+redis-cli -h demo-redis-service -p 6379 -a redispass
