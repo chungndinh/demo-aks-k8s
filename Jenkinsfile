@@ -41,7 +41,7 @@ pipeline {
 				}
                 sh "cd app"
                 sh "ls"
-				sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
+				sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} /app/. "
 				sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
 				script {
           			if (GIT_BRANCH ==~ /.*main.*/) {
