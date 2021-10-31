@@ -7,3 +7,5 @@ kubectl create secret generic demo-redis-secret --from-literal=REDIS_PASSWORD=re
 File bash script phải được tab
 Trong docker thêm command để kiểm tra kết nối tới redis
 apk --update add redis 
+
+redis-cli -h demo-redis-service -p 6379 -a redispass
