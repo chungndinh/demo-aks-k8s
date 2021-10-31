@@ -39,17 +39,19 @@ pipeline {
 				withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
             			sh "docker login -u chungnd -p ${dockerhub}"
 				}
-                sh "cd app"
-                sh "ls"
-				sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} /app/. "
-				sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-				script {
-          			if (GIT_BRANCH ==~ /.*main.*/) {
-						sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
-						sh "docker push ${DOCKER_IMAGE}:latest"
+				dir('app') 
+				{
+					sh "ls"
+					sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
+					sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+					script {
+						if (GIT_BRANCH ==~ /.*main.*/) {
+							sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+							sh "docker push ${DOCKER_IMAGE}:latest"
+						}
 					}
+					sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
 				}
-				sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
 		    }
 	    }
 	    stage('Deploy to K8s') {
