@@ -4,10 +4,10 @@ pipeline {
 	
 	environment {
 		DOCKER_IMAGE = 'chungnd/nodejs-mongodb'
-		// PROJECT_ID = 'lively-transit-313800'
-        //         CLUSTER_NAME = 'cluster-1'
-        //         LOCATION = 'asia-south1-a'
-        //         CREDENTIALS_ID = 'kubernetes'		
+		PROJECT_ID = 'divine-display-330317'
+                CLUSTER_NAME = 'demo-cluster-0'
+                LOCATION = 'asia-northeast1-a'
+                CREDENTIALS_ID = 'key-gke'		
 	}
 	
     stages {
@@ -58,14 +58,16 @@ pipeline {
 		    steps{
 				script {
           			if (GIT_BRANCH ==~ /.*main.*/) {
-						echo "Deployment started ..."
-						// sh 'ls -ltr'
-						// sh 'pwd'
-						
-						// echo "Start deployment of nodejs-deployment.yaml"
-						// step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'Deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-						// echo "Deployment Finished ..."
-						
+						dir('k8s/demo-nodejs-mongodb-redis')
+						{
+							echo "Deployment started ..."
+							sh 'ls -ltr'
+							// sh 'pwd'
+							
+							echo "Start deployment of nodejs-deployment.yaml"
+							step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'nodejs-deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+							echo "Deployment Finished ..."
+						}
 					  }
 					else
 					{
