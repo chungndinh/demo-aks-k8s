@@ -62,7 +62,7 @@ pipeline {
 						{
 							echo "Deployment started ..."
 							sh 'ls -ltr'
-							// sh 'pwd'
+							sh 'pwd'
 							
 							// echo "Start deployment of nodejs-deployment.yaml"
 							// step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'nodejs-deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
