@@ -58,7 +58,7 @@ pipeline {
 		    steps{
 				script {
           			if (GIT_BRANCH ==~ /.*main.*/) {
-						dir('/k8s/demo-nodejs-mongodb-redis')
+						dir('k8s')
 						{
 
 							echo "Deployment started ..."
