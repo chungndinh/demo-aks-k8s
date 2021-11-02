@@ -60,14 +60,16 @@ pipeline {
           			if (GIT_BRANCH ==~ /.*main.*/) {
 						dir('k8s')
 						{
-
-							echo "Deployment started ..."
-							sh 'ls'
-							sh 'pwd'
-							
-							echo "Start deployment of nodejs-deployment.yaml"
-							step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'nodejs-deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-							echo "Deployment Finished ..."
+							dir('demo-nodejs-mongodb-redis')
+							{
+								echo "Deployment started ..."
+								sh 'ls'
+								sh 'pwd'
+								
+								echo "Start deployment of nodejs-deployment.yaml"
+								step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'nodejs-deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+								echo "Deployment Finished ..."
+							}
 						}
 					  }
 					else
