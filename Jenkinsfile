@@ -62,7 +62,7 @@ pipeline {
 						{
 
 							echo "Deployment started ..."
-							sh 'ls -ltr'
+							sh 'ls'
 							sh 'pwd'
 							
 							echo "Start deployment of nodejs-deployment.yaml"
