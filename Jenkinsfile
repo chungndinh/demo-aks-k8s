@@ -62,7 +62,7 @@ pipeline {
 						{
 							dir('demo-nodejs-mongodb-redis')
 							{
-								echo "Deployment started ..."
+								echo "Deployment started .. ."
 								sh 'ls'
 								sh 'pwd'
 								
