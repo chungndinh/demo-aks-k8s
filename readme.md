@@ -1,0 +1,35 @@
+1. Install docker
+curl -fsSL https://get.docker.com/ | sh
+2. Install docker jenkin with port 8181 and mount
+docker run -u 0 --privileged --name jenkins -it -d -p 8181:8080 -p 50000:50000 \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v $(which docker):/usr/bin/docker \
+-v /home/jenkins_home:/var/jenkins_home \
+jenkins/jenkins:latest
+3. Install plugin in jenkins
+Docker Pipeline
+Docker Plugin
+Google Kubernetes Engine Plugin
+Kubernetes CLI Plugin
+Kubernetes plugin
+GitHub Pull Request Builder
+NodeJS Plugin
+4. Add credential for docker, github token
+Credential->System-Global credential->Add Credential
+# Add key docker hub
+Kind: secret text
+Secret: password docker
+ID&Description: dockerhub
+# Add token github
+Kind: secret text
+Secret: token of github
+ID&Description: token-github
+5. Add NodeJS Plugin  "tools {nodejs "node"}" in Jenkinsfile
+Global Tool Configuration -> NodeJS -> name: node
+6. Add key token-github: 
+configuration -> GitHub -> Credentials: select token-github -> Tick Manage hooks
+
+7. Create item Pipeline
+# Tick "Github project" and add url of github
+# Tick "GitHub hook trigger for GITScm polling"
+# Pipeline: Definition -> Pipeline Script from SCM: https://github.com/chungndinh/demo-aks-k8s.git
