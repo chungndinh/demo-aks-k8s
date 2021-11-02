@@ -4,6 +4,8 @@ metadata:
   name: demo-nodejs-deployment
 spec:
   replicas: 2
+  strategy: # change here
+    type: RollingUpdate
   selector:
     matchLabels:
       app: demo-nodejs-app
