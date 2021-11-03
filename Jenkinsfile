@@ -7,7 +7,8 @@ pipeline {
 		PROJECT_ID = 'divine-display-330317'
                 CLUSTER_NAME = 'demo-cluster-0'
                 LOCATION = 'asia-northeast1-a'
-                CREDENTIALS_ID = 'key-gke'		
+                CREDENTIALS_ID = 'key-gke'
+		DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"		
 	}
 	
     stages {
@@ -30,9 +31,10 @@ pipeline {
 
 	    stage('Build & Push Docker Image') {
 			// agent { node {label 'main'}}
-			environment {
-        		DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
-      		}
+
+			// environment {
+        	// 	DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
+      		// }
 		    steps {
                 echo "$DOCKER_TAG"
 				
