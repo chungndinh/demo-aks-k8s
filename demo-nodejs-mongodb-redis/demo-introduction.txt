@@ -1,9 +1,0 @@
-kubectl create secret generic demo-db-root-secret --from-literal=MONGO_INITDB_ROOT_USERNAME=mongoadmin --from-literal=MONGO_INITDB_ROOT_PASSWORD=mongoadmin
-kubectl create secret generic demo-db-secret --from-literal=DB_USER=myuser --from-literal=DB_PASSWORD=myuserpass
-        envFrom:      
-        - secretRef:
-            name: postgres-test-secret
-kubectl create secret generic demo-redis-secret --from-literal=REDIS_PASSWORD=redispass
-File bash script phải được tab
-Trong docker thêm command để kiểm tra kết nối tới redis
-apk --update add redis 
