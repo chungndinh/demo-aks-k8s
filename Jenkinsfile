@@ -1,13 +1,13 @@
 pipeline {
   agent any
   tools {nodejs "node"}
-	
+
 	environment {
 		DOCKER_IMAGE = 'chungnd/nodejs-mongodb'
 		PROJECT_ID = 'divine-display-330317'
-                CLUSTER_NAME = 'demo-cluster-0'
-                LOCATION = 'asia-northeast1-a'
-                CREDENTIALS_ID = 'key-gke'
+        CLUSTER_NAME = 'demo-cluster-0'
+        LOCATION = 'asia-northeast1-a'
+        CREDENTIALS_ID = 'key-gke'
 		DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"		
 	}
 	
@@ -22,8 +22,8 @@ pipeline {
 					// sh 'pwd'
 					// sh 'pwd'
 					// sh '/usr/local/bin/phpunit/phpunit .'
-					sh "npm install"
-					sh "npm test"
+					// sh "npm install"
+					// sh "npm test"
 					// sh 'npm config ls'
 					// sh 'npm install'
 				}
