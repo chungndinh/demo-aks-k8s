@@ -35,4 +35,10 @@ Tick "GitHub hook trigger for GITScm polling"
 Pipeline: Definition -> Pipeline Script from SCM: https://github.com/chungndinh/demo-aks-k8s.git
 # 8. Create service account (IAM & admin)
 IAM & Admin -> Service Account -> Create and add Role Kubernetes Engine Admin -> Create key JSON
-# 9. 
+# 9. Install kubernetes in docker Jenkins
+docker exec -it jenkins /bin/bash
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install kubectl -y
+
