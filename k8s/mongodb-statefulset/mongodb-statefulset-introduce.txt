@@ -1,0 +1,38 @@
+kubectl run mongo-example --rm -it --image mongo -- sh
+#Test user pass
+mongo
+use my_db # tên database của chúng ta
+db.auth("myuser", "myuserpass")
+#Add node
+rs.initiate({ _id: "MainRepSet", version: 1, 
+members: [ 
+ { _id: 0, host: "mongodb-statefulset-0.mongodb-statefulset-service.default.svc.cluster.local:27017" }, 
+ { _id: 1, host: "mongodb-statefulset-1.mongodb-statefulset-service.default.svc.cluster.local:27017" }, 
+ { _id: 2, host: "mongodb-statefulset-2.mongodb-statefulset-service.default.svc.cluster.local:27017" },
+ { _id: 3, host: "mongodb-statefulset-3.mongodb-statefulset-service.default.svc.cluster.local:27017" }
+ ]});
+rs.status()
+#Add other node
+rs.add("mongodb-statefulset-3.mongodb-statefulset-service.default.svc.cluster.local:27017")
+#Add user to test
+db.getSiblingDB("admin").createUser({
+      user : "main_admin",
+      pwd  : "abc123",
+      roles: [ { role: "root", db: "admin" } ]
+ });
+
+#Add data to test
+> db.getSiblingDB('admin').auth("main_admin", "abc123");
+> use test;
+> db.testcoll.insert({a:1});
+> db.testcoll.insert({b:2});
+> db.testcoll.find();
+
+#Check data after delete pod
+> db.getSiblingDB('admin').auth("main_admin", "abc123");
+> use test;
+> db.getMongo().setSlaveOk()
+> db.testcoll.find();
+
+#Replicas 
+kubectl scale --replicas=5 statefulset mongodb-statefulset

@@ -1,0 +1,70 @@
+# MongoDB PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: demo-mongodb-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+# MongoDB Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-mongodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-mongodb
+  template:
+    metadata:
+      labels:
+        app: demo-mongodb
+    spec:
+      volumes:
+# Thêm storage cho db mongodb        
+      - name: demo-mongodb-storage
+        persistentVolumeClaim:
+          claimName: demo-mongodb-pvc
+# Thêm configmap cho db mongodb để mount vào container chạy bash script
+      - name: nodejs-db-entrypoint-configmap
+        configMap:
+          name: nodejs-db-entrypoint-configmap
+      containers:
+      - name: demo-mongodb
+        image: mongo
+        volumeMounts:
+# Mount storage
+          - name: demo-mongodb-storage
+            mountPath: /data/db
+# Mount config map chứa file bash script tạo username, password db vào container            
+          - name: nodejs-db-entrypoint-configmap
+            mountPath: /docker-entrypoint-initdb.d
+        ports:
+        - containerPort: 27017
+        envFrom:
+# Khai báo biến config map, mật khẩu init root của db, user,password của db          
+          - configMapRef:
+              name: demo-nodejs-configmap    
+          - secretRef:
+              name: demo-db-root-secret    
+          - secretRef:
+              name: demo-db-secret       
+# Service MongoDB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-mongodb-service
+spec:
+  selector:
+    app: demo-mongodb
+  ports:
+  - port: 27017
+    targetPort: 27017
+
+

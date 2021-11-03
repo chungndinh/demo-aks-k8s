@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-statefulset
+spec:
+  serviceName: mongodb-statefulset-service
+  replicas: 3
+  selector:
+    matchLabels:
+      role: mongodb-statefulset
+  template:
+    metadata:
+      labels:
+        role: mongodb-statefulset
+        environment: test
+        replicaset: MainRepSet
+    spec:
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: nodejs-db-entrypoint-configmap
+        configMap:
+          name: nodejs-db-entrypoint-configmap
+          defaultMode: 0777
+      containers:
+        - name: mongodb-statefulset-container
+          image: mongo
+          command:
+            - "mongod"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - "MainRepSet"
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-statefulset-pvc
+              mountPath: /data/db
+            - name: nodejs-db-entrypoint-configmap
+              mountPath: /docker-entrypoint-initdb.d
+          envFrom:
+            - secretRef:
+                name: demo-db-root-secret
+            - secretRef:
+                name: demo-db-secret
+            - configMapRef:
+                name: demo-nodejs-configmap
+
+        # - name: mongodb-statefulset-sidecar
+        #   image: cvallance/mongo-k8s-sidecar
+        #   env:
+        #   - name: MONGO_SIDECAR_POD_LABELS # CAUTION: Change this if you change your labels !!!!
+        #     value: "role=mongodb-statefulset"
+        #   - name: KUBERNETES_MONGO_SERVICE_NAME # This tells the sidecar which service you will use to expose pods
+        #     value: "mongodb-statefulset-service"
+        #   # - name: KUBE_NAMESPACE # CAUTION: Change this or remove this if you change the namespace
+        #   #   value: "mongo-namespace"
+        #   # - name: MONGODB_USERNAME # Import our user from the config map
+        #   #   valueFrom:
+        #   #     configMapKeyRef:
+        #   #       name: mongo-config
+        #   #       key: MONGO_INITDB_ROOT_USERNAME
+        #   - name: MONGODB_USERNAME # Import our password
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: demo-db-root-secret
+        #         key: MONGO_INITDB_ROOT_USERNAME
+        #   - name: MONGODB_PASSWORD # Import our password
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: demo-db-root-secret
+        #         key: MONGO_INITDB_ROOT_PASSWORD
+        #   - name: MONGODB_DATABASE # The mongdb admin database
+        #     value: my_db
+        #   envFrom:
+        #     - secretRef:
+        #         name: demo-db-secret
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb-statefulset-pvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "fast"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

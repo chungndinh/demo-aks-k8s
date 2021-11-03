@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service-extenal
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: prometheus-prometheus-oper-prometheus.monitoring.svc.cluster.local

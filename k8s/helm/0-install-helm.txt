@@ -1,0 +1,7 @@
+#### Install Redis Cluster by helm
+https://medium.com/@thanawitsupinnapong/setting-up-redis-in-kubernetes-with-helm-and-manual-persistent-volume-f1d52fa1919f
+
+####Install Mongodb by helm
+helm show values bitnami/mongodb | nano ~
+-->mongodb-deployment.yaml
+helm install mongodb -f .\k8s\mongodb\helm\mongodb\mongodb-deployment.yaml bitnami/mongodb 

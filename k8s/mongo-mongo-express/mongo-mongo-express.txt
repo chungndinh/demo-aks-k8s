@@ -1,0 +1,17 @@
+I. MongoDB
+    1. Create secret
+kubectl create secret generic mongodb-secret --from-literal=mongo-root-username=mongoadmin --from-literal=mongo-root-password=mongoadmin
+    2. Init User Password mongodb
+
+        env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password  
+

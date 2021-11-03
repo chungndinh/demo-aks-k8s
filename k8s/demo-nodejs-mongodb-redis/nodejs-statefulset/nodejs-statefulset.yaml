@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nodejs-statefulset
+spec:
+  selector:
+    matchLabels:
+      app: demo-nodejs-app
+  serviceName: demo-nodejs-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: demo-nodejs-app
+    spec:
+      # volumes:
+      # - name: demo-nodejs-storage
+      #   persistentVolumeClaim:
+      #     claimName: demo-nodejs-pvc    
+      containers:
+      - name: demo-nodejs-app
+        image: chungnd/nodejs-mongodb:latest
+        volumeMounts:
+          - name: demo-nodejs-pvc
+            mountPath: /app/public/images       
+        ports:
+        - containerPort: 3000
+        envFrom:
+# Khai báo các biến cấu hình        
+          - configMapRef:
+              name: demo-nodejs-configmap
+# Khai báo mật khẩu db mongo, redis
+          - secretRef:
+              name: demo-db-secret
+          - secretRef:
+              name: demo-redis-secret
+
+  volumeClaimTemplates:
+  - metadata:
+      name: demo-nodejs-pvc
+    spec:
+      storageClassName: demo-nodejs-storageclass
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

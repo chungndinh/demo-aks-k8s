@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: nginx   
+spec:
+  rules:
+  - host: www.motbay.ga
+    http:
+      paths:
+      - backend:
+          service:
+            name: grafana-service-extenal
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: motbay.ga
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: prometheus-service-extenal
+            port:
+              number: 9090
+        pathType: Prefix
+      - path: /monitor/(.*)
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 8080
+        pathType: Prefix
+  tls:
+  - hosts:
+    - www.motbay.ga
+    - motbay.ga
+    secretName: motbay.ga-tls

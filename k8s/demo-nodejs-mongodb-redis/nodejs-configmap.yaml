@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-nodejs-configmap
+  labels:
+    app: demo-nodejs-app
+data:
+  # DB_HOST: "demo-mongodb-service"
+  # Host DB mongodb-helm
+  DB_HOST: "mongodb-helm-headless"
+  # DB_HOST: "mongodb-service"
+  DB_PORT: "27017"
+  DB_NAME: "test_db"
+  REDIS_HOST: "demo-redis-service"
+  REDIS_PORT: "6379"
+  PORT: "3000"
