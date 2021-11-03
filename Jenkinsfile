@@ -15,17 +15,18 @@ pipeline {
 	    
 		stage('Test') {
 		    steps {
+				dir('app') 
+				{
 			    echo "Testing..."
-			    // sh '/usr/local/bin/phpunit/phpunit --version'
-				// sh 'pwd'
-				// sh 'pwd'
-				// sh '/usr/local/bin/phpunit/phpunit .'
-				sh "cd app"
-                sh "ls"
-				// sh "npm install"
-				// sh "npm test"
-				// sh 'npm config ls'
-				// sh 'npm install'
+					// sh '/usr/local/bin/phpunit/phpunit --version'
+					// sh 'pwd'
+					// sh 'pwd'
+					// sh '/usr/local/bin/phpunit/phpunit .'
+					// sh "npm install"
+					sh "npm test"
+					// sh 'npm config ls'
+					// sh 'npm install'
+				}
 		    }
 	    }
 
