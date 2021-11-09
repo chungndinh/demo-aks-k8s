@@ -46,14 +46,14 @@ spec:
               number: 3000
         path: /
         pathType: Prefix
-  - host: kibana.motthang.ga
+  - host: rancher.motthang.ga
     http:
       paths:
       - backend:
           service:
-            name: kibana-kibana
+            name: rancher-service-external
             port:
-              number: 5601
+              number: 80
         path: /
         pathType: Prefix
   # - host: motthang.ga
@@ -170,7 +170,7 @@ spec:
     # - result.motthang.ga
     # - guestbook.motthang.ga
     # - mongodb.motthang.ga
-    - kibana.motthang.ga
+    - rancher.motthang.ga
     - develop.motthang.ga
     secretName: motthang.ga-certificate-secret
  

@@ -25,6 +25,9 @@ spec:
         volumeMounts:
           - name: demo-nodejs-storage
             mountPath: /app/public/images
+        resources:
+          requests:
+            cpu: 100m
         ports:
         - containerPort: 3000
         envFrom:
