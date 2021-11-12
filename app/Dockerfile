@@ -11,5 +11,6 @@ RUN apk --update add redis
 # CMD ["npm", "run", "dev"]
 
 # Production
+RUN npm install --save-dev mocha chai
 RUN npm install -g pm2
 CMD ["pm2-runtime", "ecosystem.config.js", "--env", "production"]
