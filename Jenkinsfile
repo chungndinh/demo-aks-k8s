@@ -18,6 +18,7 @@ pipeline {
 				dir('app') 
 				{
 			    echo "Testing..."
+					sh "ls -ltr"
 					// sh '/usr/local/bin/phpunit/phpunit --version'
 					// sh 'pwd'
 					// sh 'pwd'
