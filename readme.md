@@ -20,7 +20,7 @@ Credential->System-Global credential->Add Credential
 Kind: secret text
 Secret: password docker
 ID&Description: dockerhub
-# 4.2 Add token github
+# 4.2 Add token github 
 Kind: secret text
 Secret: token of github
 ID&Description: token-github
