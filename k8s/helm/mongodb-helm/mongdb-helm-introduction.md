@@ -2,30 +2,31 @@
 openssl rand -base64 756 > key.txt
 kubectl create secret generic keyfilesecret --from-file=key.txt
 
-#Secret create secret for script (db-entrypoint.sh) 
+# Secret create secret for script (db-entrypoint.sh) 
 kubectl create secret generic mongodb-helm-db --from-literal=DB_USER=myuser --from-literal=DB_PASSWORD=myuserpass --from-literal=DB_NAME=test_db --from-literal=DB_PORT=27017 --from-literal=MONGO_INITDB_ROOT_USERNAME=root --from-literal=MONGO_INITDB_ROOT_PASSWORD=mongodb
 kubectl create secret generic mongodb-helm-secret --from-literal=mongodb-password=myuserpass --from-literal=mongodb-root-password=mongodb --from-file=mongodb-replica-set-key=.\helm\mongodb-helm\key.txt
 
-#Create storageclass mongodb-helm-storageclass.yaml
-#Install configmap nodejs-db-entrypoint-configmap.yaml
-#Install mongodb by helm
+# Create storageclass mongodb-helm-storageclass.yaml
+# Install configmap nodejs-db-entrypoint-configmap.yaml
+# Install mongodb by helm
 helm install mongodb-helm bitnami/mongodb -f .\helm\mongodb-helm\mongodb-helm-deployment.yaml
-#Check 
+# Check 
 mongo
 db.getSiblingDB('test_db').auth("myuser", "myuserpass");
 use test_db
 > db.testcoll.insert({a:1});
 > db.testcoll.insert({b:2});
 > db.testcoll.find();
-#Check other pod db
+# Check other pod db
 mongo
 db.getSiblingDB('test_db').auth("myuser", "myuserpass");
 > db.getMongo().setSlaveOk()
 > db.testcoll.find();
-#Create db develop
+# Create db develop
 mongo --host localhost -u root
+use test_db_develop
 db.createUser({user: 'mongodb_develop', pwd: 'mongodb_develop', roles:[{role:'dbOwner', db: 'test_db_develop'}]});
-#Add prometheus
+# Add prometheus
 serviceMonitor: -> enable -> namespace: monitoring -> additionalLabels: {release: prometheus}
 
 #Code in app.js
