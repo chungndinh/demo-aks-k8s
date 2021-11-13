@@ -24,6 +24,7 @@ pipeline {
 					// sh 'pwd'
 					// sh '/usr/local/bin/phpunit/phpunit .'
 					// sh "npm install"
+					sh "npm install --save-dev mocha"
 					sh "npm test"
 					// sh 'npm config ls'
 					// sh 'npm install'
