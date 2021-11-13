@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: mypvc-develop
           gcePersistentDisk:
-            pdName: nfs-disk-develop
+            pdName: nfs-disk-develop-0
             fsType: ext4
 ---
 apiVersion: v1

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nodejs-db-entrypoint-configmap
+  name: mongodb-entrypoint-configmap
 data:
   db-entrypoint.sh: |
     mongo ${DB_NAME} \

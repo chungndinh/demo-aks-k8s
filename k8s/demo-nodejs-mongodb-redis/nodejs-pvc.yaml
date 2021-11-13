@@ -4,12 +4,12 @@ metadata:
   name: demo-nodejs-pv
 spec:
   capacity:
-    storage: 20Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteMany
   nfs:
     #### IP gluster svc nfs
-    server: 10.92.6.13
+    server: 10.56.3.218
     path: "/"
 
 ---
@@ -23,7 +23,7 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 20Gi
+      storage: 10Gi
 # apiVersion: v1
 # kind: PersistentVolumeClaim
 # metadata:
