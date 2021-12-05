@@ -1,3 +1,4 @@
+# Link: https://docs.bitnami.com/tutorials/create-ci-cd-pipeline-jenkins-gke/
 # 1. Install docker
 curl -fsSL https://get.docker.com/ | sh
 # 2. Install docker jenkin with port 8181 and mount
