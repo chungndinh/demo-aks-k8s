@@ -64,14 +64,14 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: filebeat
-        image: docker.elastic.co/beats/filebeat:7.9.3
+        image: docker.elastic.co/beats/filebeat:7.15.2
         args: [
           "-c", "/etc/filebeat.yml",
           "-e",
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: 178.128.99.191
+          value: "116.102.226.159"
         - name: ELASTICSEARCH_PORT
           value: "9200"
         # - name: ELASTICSEARCH_USERNAME

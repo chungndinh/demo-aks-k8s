@@ -114,7 +114,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: metricbeat
-        image: docker.elastic.co/beats/metricbeat:7.9.3
+        image: docker.elastic.co/beats/metricbeat:7.9.0
         args: [
           "-c", "/etc/metricbeat.yml",
           "-e",
@@ -122,7 +122,7 @@ spec:
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: 178.128.99.191
+          value: "116.102.226.159"
         - name: ELASTICSEARCH_PORT
           value: "9200"
         # - name: ELASTICSEARCH_USERNAME
@@ -261,14 +261,14 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: metricbeat
-        image: docker.elastic.co/beats/metricbeat:7.9.3
+        image: docker.elastic.co/beats/metricbeat:7.9.0
         args: [
           "-c", "/etc/metricbeat.yml",
           "-e",
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: 178.128.99.191
+          value: "116.102.226.159"
         - name: ELASTICSEARCH_PORT
           value: "9200"
         # - name: ELASTICSEARCH_USERNAME

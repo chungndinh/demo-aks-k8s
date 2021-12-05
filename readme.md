@@ -24,6 +24,8 @@ ID&Description: dockerhub
 Kind: secret text
 Secret: token of github
 ID&Description: token-github
+# 4.3 Create token github
+repo, admin:org_hook, notifications, user, write:discussion 
 # 5. Add NodeJS Plugin  "tools {nodejs "node"}" in Jenkinsfile
 Global Tool Configuration -> NodeJS -> name: node
 # 6. Add key token-github: 
