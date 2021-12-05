@@ -32,7 +32,6 @@ repo, admin:org_hook, notifications, user, write:discussion
 Global Tool Configuration -> NodeJS -> name: node
 # 6. Add key token-github: 
 configuration -> GitHub -> Credentials: select token-github -> Tick Manage hooks
-
 # 7. Create item Pipeline
 Tick "Github project" and add url of github
 Tick "GitHub hook trigger for GITScm polling"
