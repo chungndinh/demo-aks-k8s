@@ -25,6 +25,8 @@ Kind: secret text
 Secret: token of github
 ID&Description: token-github
 # 4.3 Create token github
+# 4.4 Add key GKE
+Click the "Add credentials" link. Select the "Google Service Account from private key" credential type and set the project name (which doubles as the credential identifier) to gke. Select the "JSON key" radio button and upload the JSON key obtained in Step 2. Click "OK" to save the changes.
 repo, admin:org_hook, notifications, user, write:discussion 
 # 5. Add NodeJS Plugin  "tools {nodejs "node"}" in Jenkinsfile
 Global Tool Configuration -> NodeJS -> name: node
