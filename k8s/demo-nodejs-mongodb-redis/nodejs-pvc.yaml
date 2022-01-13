@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   nfs:
     #### IP gluster svc nfs
-    server: 10.56.3.218
+    server: 10.72.15.68
     path: "/"
 
 ---

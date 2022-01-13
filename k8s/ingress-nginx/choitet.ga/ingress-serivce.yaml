@@ -36,16 +36,16 @@ spec:
               number: 3000
         path: /
         pathType: Prefix
-  - host: develop.choitet.ga
-    http:
-      paths:
-      - backend:
-          service:
-            name: demo-nodejs-develop-service
-            port:
-              number: 3000
-        path: /
-        pathType: Prefix   
+  # - host: develop.choitet.ga
+  #   http:
+  #     paths:
+  #     - backend:
+  #         service:
+  #           name: demo-nodejs-develop-service
+  #           port:
+  #             number: 3000
+  #       path: /
+  #       pathType: Prefix   
   - host: monitor.choitet.ga
     http:
       paths:
@@ -62,6 +62,6 @@ spec:
     - www.choitet.ga
     - choitet.ga
     - monitor.choitet.ga
-    - develop.choitet.ga
+    # - develop.choitet.ga
     secretName: choitet.ga-certificate-secret
  

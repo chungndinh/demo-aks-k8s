@@ -5,8 +5,8 @@ pipeline {
 	environment {
 		DOCKER_IMAGE = 'chungnd/nodejs-mongodb'
 		PROJECT_ID = 'divine-display-330317'
-        CLUSTER_NAME = 'demo-cluster-1'
-        LOCATION = 'asia-east2-a'
+        CLUSTER_NAME = 'cluster-00'
+        LOCATION = 'asia-south1-a'
         CREDENTIALS_ID = 'key-gke'
 		DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"		
 	}
